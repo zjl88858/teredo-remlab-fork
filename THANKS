@@ -1,0 +1,25 @@
+  The following people deserve particular thanks for their contribution to the
+project (in almost chronological order):
+
+François-Xavier Potel	Support at ECP university
+Gene Cronk		FreeBSD test platform
+Laurent Granger		Tests against Windows XP
+Michael H. Warfield	RHEL testing, fix
+Vladimir Kotal		FreeBSD fix
+Guy Thornley		Fix for clients to clients communication
+Richard Bejtlich	FreeBSD tests and reports
+Rui Paulo		NetBSD port, fixes and reports
+Anand Kumria		Debian fixes and reports
+Marco d’Itri (ITGate)	First relay deployment
+André-John Mas		Darwin/Mac OS X test platform
+Jörg Sonnenberger	DragonFly fixes (via NetBSD port)
+Bernhard Schmidt	Relay deployment and Teredo server hosting
+Pekka Savola		FreeBSD tests, report
+Nathan Lutchansky	Linux tests, report
+Marcus Rückert		OpenSUSE package
+Jari Korva		UMTS testing, bug report
+Robert B. Quattlebaum	Mac OSX package, patches, suggestions...
+Martin Uecker		ARM bug report
+Lutz Donnerhacke	Server regression fix, debug messages patch
+角川宗近(Munechika Sumikawa)	FreeBSD fixes
+Andrius Morkūnas	FreeBSD fix

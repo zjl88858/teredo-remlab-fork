@@ -1,0 +1,603 @@
+RELEASE NOTES for Miredo
+stable release version 1.2.6
+=============================
+
+  This is a stable release. There are no known outstanding issues. We
+strongly encourage users from previous releases to upgrade, as some important
+fixes are included.
+  Please report any problem by email to miredo-devel (at) remlab (dot) net
+
+  You can find major changes since version 0.1.0 below. For more general
+informations on this program, see README. For syntax details and
+changes, run “miredo -h” to get help. For detailled internal changes, see
+ChangeLog.
+
+===========================================================================
+STABLE RELEASE 1.2.6 : Minor features enhancement
+
+# Fix compilation on some systems.
+# Add simplified Chinese localization.
+
+===========================================================================
+STABLE RELEASE 1.2.5 : Minor features enhancement
+
+# Fix compatibility with newer GNU/automake.
+# Add systemd configuration file.
+# Automatically load if_tun on FreeBSD.
+
+===========================================================================
+STABLE RELEASE 1.2.4 : Minor features enhancement
+
+# Use POSIX tree instead of linked list when libJudy is missing/disabled.
+
+===========================================================================
+STABLE RELEASE 1.2.3 : Minor portability fixes
+
+# Fix C pointer aliasing violations.
+# Fix compilation with FreeBSD 7.2 or later.
+
+===========================================================================
+STABLE RELEASE 1.2.2 : Major bug fixes
+
+# Fix SIGHUP signal handling (again).
+# Compilation fix for Debian GNU/kFreeBSD.
+
+===========================================================================
+STABLE RELEASE 1.2.1 : Minor bug fixes
+
+# Fix deadlock if Miredo fails to start.
+
+===========================================================================
+STABLE RELEASE 1.2.0 : Minor portability fix
+
+# Fix compilation on FreeBSD
+
+===========================================================================
+STABLE RELEASE 1.1.7 : Major bug fixes
+
+# Fix crash in client more (regression from 1.1.6).
+# Thread-safety fixes (with regards to sigaction and strerror).
+# Fix client hook script for FreeBSD
+
+===========================================================================
+STABLE RELEASE 1.1.6 : Minor bug fixes
+
+# Fix compiling on FreeBSD.
+# Incomplete ISATAP support removed.
+  In the mean time, proper support was added within the Linux kernel.
+# Fix client error handling when resolving server name.
+# Fix server link-local address, compatibility with Vista clients.
+
+===========================================================================
+STABLE RELEASE 1.1.5 : Minor bug fixes
+
+# Fix SIGHUP signal handling.
+# Fix compiling on MacOS X and/or without libJudy.
+
+===========================================================================
+STABLE RELEASE 1.1.4 : Minor bug fixes
+
+# Fix client-hook script problems with Fedora.
+# Fix unlikely race condition in Teredo maintenance procedure setup.
+
+===========================================================================
+STABLE RELEASE 1.1.3 : Major bug fixes, minor feature enhancement
+
+# Fix Teredo address randomization (reachability problems).
+# Better debug messages.
+# Allow GNU General Public License version 3 (and would be later).
+
+===========================================================================
+TEST RELEASE 1.1.2 : Minor bug fixes
+
+# Fix filtering error within miredo-server (regression from 1.1.0).
+
+===========================================================================
+TEST RELEASE 1.1.1 : Minor bug fixes
+
+# Fix fatal padding mistake on old ABI ARM achitecture.
+
+===========================================================================
+TEST RELEASE 1.1.0 : Major features enhancement
+
+# Remove NAT type determination:
+  Miredo now runs behind any type of NAT. However, connectivity might
+  be severely degraded behind the worst devices, such as symmetric NATs.
+
+# Add 12 bits of randomness to Teredo client address:
+  Teredo addresses are less predictible, which should enhance host
+  protection against network scanning.
+
+# Remove brittle and battery-unfriendly "autoclient" mode:
+  Proper default IPv6 source address selection (RFC3484) implementation
+  would address most of the use cases for this, as well as other issues.
+  If that is not sufficient, an external connection management system
+  is anyway needed to start/stop Miredo when appropriate.
+
+# Restore "cone" RelayType:
+  All relays should use it, as it improves support for some kinds of
+  (pretty broken but nevertheless deployed) NAT devices.
+
+# Minor specification conformance fixes to miredo-server.
+# Use a hook shell script for client interface configuration.
+# Add a bunch of debug messages to debug builds.
+# Rewrite clock subsystem to avoid polling when idle (battery savings).
+# Some minor bug fixes.
+
+===========================================================================
+STABLE RELEASE 1.0.6 : Minor features enhancement
+
+# Fix support for Teredo peers behind symmetric NATs (bug from 0.9.8).
+  This could probably be used to spoof a Teredo clients.
+# MacOS X compilation fix.
+
+===========================================================================
+STABLE RELEASE 1.0.5 : Major bug fixes
+
+# Fix issues with timer and compiler optimizations (bug from 0.9.4).
+# Increase ping test hop limit:
+  Some IPv6 native nodes could not be reached otherwise.
+# Increase HMAC secret size from 64 to 128 bits.
+# Fix filtering of packets with link-local source address (bug from 0.4.0).
+# Various fixes to the experimental ISATAP daemon.
+
+============================================================================
+STABLE RELEASE 1.0.4 : Major bug fix
+
+# Fix packet storm with Teredo client behind symmetric NATs.
+
+============================================================================
+STABLE RELEASE 1.0.3 : Minor feature enhancement
+
+# Work-around for compatibility with Microsoft Teredo servers.
+# Better detection of symmetric NATs and access network changes.
+# Limit spamming of syslog.
+
+============================================================================
+STABLE RELEASE 1.0.2 : Minor portability and bug fixes
+
+# Several portability and minor/impossible bug fixes (see ChangeLog).
+
+============================================================================
+STABLE RELEASE 1.0.1 : Minor portability fixes
+
+# Install configuration file samples into a dedicated directory.
+# Build fixes (libteredo would not link on Mac OS X).
+
+============================================================================
+STABLE RELEASE 1.0.0 : Minor portability fixes
+
+# Various minor build fixes.
+
+============================================================================
+RELEASE CANDIDATE 0.9.9 : Minor portability fixes
+
+# NetBSD 4 build fixes.
+
+============================================================================
+RELEASE CANDIDATE 0.9.8 : Major feature enhancements, major security fixes
+
+# Support interacting with Teredo clients behind symmetric NATs.
+# Fix multiple problems with HMAC/ping authentication of non-Teredo nodes.
+# Increase timestamp wrap time from 18 hours to 70 years to avoid replay
+  attacks against authentication tokens.
+# Allow Router Advertisement through the ISATAP tunnel (untested).
+  isatapd remain very experimental, particular client-side.
+  Someone ought to make a clean kernel implementation instead.
+# Use HMAC instead of random nonces in Teredo clients.
+
+=============================================================================
+BETA RELEASE 0.9.7 : Major security fixes
+
+# Fix infinite UDP packet forwarding loop in Teredo server (MTFL-SA 0603).
+
+=============================================================================
+BETA RELEASE 0.9.6 : Major compatibility fixes
+
+# Lots of portability fixes, mostly for FreeBSD and the likes.
+# Removed some dead code.
+# Provide teredo-mire by default.
+# Print more helpful error message for some common BSD tunneling issues.
+
+=============================================================================
+BETA RELEASE 0.9.5 : Major features enhancement, major bug fixes
+
+# Removed too brittle cone NAT support. As a side effect, miredo is much
+  faster to startup in client mode in most cases.
+# Fix server-side handling of Windows Vista client solicitations.
+# Removed the IgnoreConeBit configure option. The cone bit is now always
+  ignored (this was the default ever since the introduction of that option).
+
+=============================================================================
+BETA RELEASE 0.9.4 : Major features enhancement
+
+# More refined system clock usage brings about 30% performance boost.
+
+=============================================================================
+BETA RELEASE 0.9.3 : Major features enhancement, major bug fixes
+
+# Use dedicated thread for packets transmission and reception. Miredo
+  should now leverage dual-process, dual-core and SMT systems.
+
+# Receive to-be-decapsulated and to-be-encapsulated packets in blocking
+  mode; this improves performance by about 10% on Linux.
+
+# Use the POSIX monotonic clock for maintenance procedure and “exclusive”
+  mode watch if POSIX monotonic clock and clock selection are available.
+
+# Minor optimizations to the most stressed code paths.
+# Suppress spurious 4-seconds delay when waiting for “symmetric” probes.
+# Minimalistic support for ISATAP client in ISATAPd.
+# Ignore invalid Router Advertisements properly.
+# Drop incoming multicast traffic as a precautionary measure.
+# Truncate PID file properly when updating it.
+# Fix deadlocks and spurious exits upon some signals (such as SIGCONT).
+# Fix deadlock when Teredo server DNS hostname resolution fails.
+# Handle would-be “spurious wakeups” properly.
+# Fix IPv4 global unicast access-list.
+# Fix SO_REUSEADDR socket option usage.
+# Use C99 restrict keyword at sensible places for compiler optimization.
+# Portability fixes for DragonFly BSD.
+# Work-around for some uClibc POSIX defines insanity.
+# Got rid of all C++ code.
+# Renamed libteredo-mire to teredo-mire for consistency.
+# Leverage newer autoconf macros.
+# Fix encoding of non-ASCII characters in manual pages.
+# Work-around for platforms that can't rename tunnel network interface.
+# Build libmiredo dynamically to reduce global code size.
+# Fix inclusion of non-PIC code into shared libraries.
+
+(Unstable version 0.9.3 includes all fixes from stable version 0.8.5)
+
+=============================================================================
+BETA RELEASE 0.9.1 : Major features enhancement
+
+# Created and referenced a developer mailing list: <miredo-devel at
+  remlab.net>. Send a mail with subject “subscribe” to <miredo-devel-request
+  at remlab.net> to subscribe.
+
+# Added isatap, an ISATAP router based on libtun6 and miredo.
+  After careful IETF IPR claim check, it seems ISATAP can be freely
+  implemented anyway.
+
+# Working support for Mac OS X:
+  - work-around overly long closefrom() replacement,
+  - work-around tuntap for OS X spurious initialization error.
+  - add required defines for pthread to work properly.
+
+# Added libteredo-miredo, an undocumented Teredo “test card”.
+# Improve miredo-checkconf semantics.
+# Multi-threaded libteredo, and finer grained locking.
+# Fix initialization in libteredo sometimes causing a crash at startup.
+# Fix race condition in libteredo-list unit test.
+# Fix _impossible_ overflow of FD_SET().
+
+(Unstable version 0.9.1 includes all fixes from stable version 0.8.4)
+
+=============================================================================
+STABLE RELEASE 0.8.2 : Minor bugfixes
+
+# New “autoclient” mode (RelayType directive in miredo.conf):
+  This is similar to client, except that Miredo will disable Teredo
+  tunneling completely whenever there is another IPv6-enabled networking
+  interface that appears to provide global IPv6 connectivity.
+
+# Insufficient privileges settings fix when using POSIX capabilities.
+# -t or --chrootdir option reintroduced to configure chroot at run-time.
+# Update and improve BinReloc for Linux support.
+# Removed useless, if not confusing, DefaultRoute configuration directive.
+# Support for tunnel interface naming on FreeBSD.
+# Various manual pages updates and fixes.
+# Various NetBSD, OpenBSD and Mac OS X portability fixes.
+# libteredo made a C99 (C++-less) library with a working C API.
+
+=============================================================================
+STABLE RELEASE 0.8.1 : Security/bug fixes
+
+# Fix possible non-Teredo IPv6 node impersonation toward Teredo client
+  due to an input validation error.
+# Change sample configuration default Teredo server to “teredo.remlab.net”.
+# Fix segmentation fault at exit when specifying a server name from the
+  command line.
+# Fix locking and deletion of PID file in background (default) mode.
+# New program: miredo-checkconf to verify configuration file syntax.
+# Partial support for NetBSD 4.0 (still not completely working).
+# libtun6 is now a reusable shared library.
+# Code clean up and other minor bug fixes.
+
+=============================================================================
+STABLE RELEASE 0.8.0 : Minor bugfixes
+
+# Now use permanent Teredo prefix 2001:0:: default instead of 3ffe:831f::.
+# (Linux-only) Fix setting of /proc/sys/net/ipv6/conf/<iface>/* entries.
+# Fix some spelling errors in documentation.
+# Many compilation fixes for FreeBSD 6.0 (also backported in v0.7.3).
+# Fix --enable-debug configure option (also in v0.7.3).
+# Use RFC 4380 as reference instead of Teredo ultimate draft 05.
+
+=============================================================================
+BETA RELEASE 0.7.1 : Major features enhancement
+
+# One hundred time more scalable peers list: Miredo should now be able to
+  handle a few hundreds of thousands of peers simultaneously while it would
+  hardly hundle one thousand previously. That is done with Judy dynamic
+  arrays (an external very fast LGPL library for hash tables). If Judy is
+  not available, the old naive and not scalable linked list algorithm will
+  still be used.
+# Basic working garbage collector for peers list.
+# Better Echo Requests and Teredo bubbles timings as regards draft 05.
+# Add --enable-debug configure option. Without this, debug stuff will no
+  longer be included.
+# Reset peers list when Teredo client status changes (bug fix)
+
+=============================================================================
+BETA RELEASE 0.7.0 : Minor features enhancement, security/bugs fixes
+
+# Make efforts to retry sending UDP packets in case of ICMP failure.
+# Partially rewritten IPv6 tunneling driver; now supports Darwin (Mac OS X).
+# Emit ICMPv6 Address unreachable error packets when a destination cannot
+  be reached via Teredo tunneling.
+# Force 2-seconds delay between multiple Echo Requests and Teredo bubbles.
+# Use HMAC-MD5 for Echo Requests “nonce”, rather than kernel entropy pool
+  (heavily reduce kernel entropy pool usage).
+# Fix Teredo client maintenance in case of system clock drift (could be
+  caused by SIGSTOP, APM/ACPI/software suspend, debugger, or system load).
+# Define Linux kernel 2.6.9 as the minimum supported Linux kernel version.
+# Use kernel IPv6 stack to generate IPv6 headers for ICMPv6 errors
+  (allow proper source address selection, and use of optimized checksum).
+# Fix Teredo peers list lookup (major bugfix also backported in 0.5.6).
+# Various optimizations and clean up throughout the code.
+# Added some regression tests.
+# Re-resolve server IP address when connectivity fails.
+# Remove chroot by default (prevents DNS resolution without platform
+  specific setup).
+# Fix minor race condition that “never happens” in Teredo client.
+
+=============================================================================
+BETA RELEASE 0.5.4 : Major bugfixes
+
+# Fix Teredo client connectivity toward Teredo clients.
+
+=============================================================================
+BETA RELEASE 0.5.3 : Minor bugfixes
+
+# Some portability fixes.
+# Minor fix to Router Advertisement parsing (not an exploitable bug).
+# Some code optimization.
+# Smaller memory footprint per peers.
+
+=============================================================================
+BETA RELEASE 0.5.2 : Major bugfixes
+
+# Fix sending of Router Solicitation in case of transient packet loss.
+# Ignore unexpected Router Advertisment.
+# Fix use of freed memory in configuration parser error handling.
+# Some more optimization and clean up.
+# Peers list size limit.
+# Multi-thread Teredo server implementation.
+# Build libteredo as a shared library (warning: API is not stabilized yet).
+
+=============================================================================
+BETA RELEASE 0.5.1 : Minor bugfixes
+
+# Set a bigger metric (lower priority) for Teredo’s default IPv6 route than
+  usual default IPv6 route, so that one can safely run miredo even if/when
+  other/better IPv6 connectivity is otherwise available (Linux-only).
+# Some code optimization for better performance.
+# Allow running miredo as root (if and only if explicitly enabled through
+  ./configure).
+# Fix use of POSIX capabilities with miredo-server.
+# Fix compilation on FreeBSD.
+# Fix adding/removal of tunnel route on FreeBSD.
+# Fix POSIX mutex deletion on exit.
+# Fix incorrect/useless passing of Teredo maintenance packets to IPv6 stack.
+# Support for OpenBSD operating system.
+# Would-be support for NetBSD operating system.
+
+=============================================================================
+BETA RELEASE 0.5.0 : Major features enhancement
+
+# Fix for infinite loop in client when processing advertisement from server
+  (also backported in release 0.4.3).
+# Finally implemented correct Teredo maintenance procedure / qualification
+  and connectivity loss detection (which is now quicker).
+# Regenerate server authentication token (“nonce”) every hour for increased
+  security.
+# Limit ICMPv6 Echo Requests sent to 3 per peer every 30 seconds.
+# Safe work-around to reach peers that rejects ICMPv6 Echo Requests.
+# Support for MTU setting (in server and relay),
+  clients now gets MTU setting from server.
+# Support for changing Teredo server’s secondary address (ServerAddress2
+  and ServerBindAddress2 directives).
+# Fix a minor race condition when the Teredo tunnel is brought up.
+
+# Teredo server support separated : it is now provided by a separate binary
+  “miredo-server”, that reads its configuration from “miredo-server.conf”.
+  Additionnally, the Teredo server now use raw IPv6 socket rather than the
+  Teredo tunneling interface, so that one doesn’t need to enabled IPv6
+  forwarding on the Teredo server (and it is more portable).
+
+# Rudimentary Autopackage support (autopackage being still buggy).
+
+=============================================================================
+BETA RELEASE 0.4.2 : Major bugfixes, minor features enhancement
+
+# Fixed connectivity issue with restricted Teredo clients/relays.
+# Re-implemented connectivity loss detection. The older version was removed
+  because it would not tolerate any packet loss.
+# Support for overriding the server specified in miredo.conf from the
+  command line.
+# Fixed handling by client of unauthenticated server responses.
+# Some clean up.
+
+=============================================================================
+BETA RELEASE 0.4.1 : Minor bugfixes
+
+# Fixed privileges separation issue on Linux with grsecurity patch.
+# Work-around a Linux kernel panic bug when bringing an interface down.
+# Fixed use of “RelayType disabled” - Miredo would always fail in that mode.
+# Improved sample configuration file comments.
+# Print logging information on the console with option -f (foreground run).
+# Complain when no sever was specified in client mode.
+
+=============================================================================
+BETA RELEASE 0.4.0 : Major features enhancement
+
+# Configuration file :
+  Miredo now reads its settings from a configuration file, miredo.conf,
+  instead of many command line options. A sample commented
+  configuration is provided in misc/miredo.conf-dist and installed in
+  /usr/local/etc/miredo.conf-dist (unless you use another installation
+  prefix).
+
+# Support for disabling components at build-time :
+  That helps producing a smaller executable. In particular, you may
+  consider running “./configure --disable-teredo-server” as very few
+  people really use the Teredo server component.
+  “--disable-teredo-client” is also provided if you only want to build
+  a Teredo relay.
+
+# Zero-memcpy, performance improvement :
+  Miredo will no longer perform any memcpy on forwarded IPv6 packets
+  payload, so as to improve processing speed a little bit.
+
+# Automatic and easy-to-setup chroot environment :
+  Miredo only needs an empty directory to chroot. It is created by
+  make install and automatically used.
+
+# PID file moved: it is now located in /usr/local/var/run/miredo.pid by
+  default.
+
+# Support for server only mode (no longer have to run a relay as well).
+
+# Support for changing syslogd facility used via miredo.conf.
+
+# Cleaned up server implementation.
+
+# Fixed packet source/destination IPv6 addresses checks in client/relay.
+
+=============================================================================
+BETA RELEASE 0.3.2 : Minor bugfixes
+
+# Configure option --enable-pidfile=<path> to change the pidfile path
+  (or --disable-pidfile to disable pidfile generation)
+
+# Safer default configuration : Miredo uses the “nobody” user which
+  should exists on any system, instead of root by default.
+
+# FreeBSD compilation fixes.
+
+=============================================================================
+BETA RELEASE 0.3.1 : Minor features enhancement
+
+# POSIX.1e capabilities support :
+  If you have libcap on your system, miredo will now use POSIX.1e
+  capabilities. That should reduce the possible impact of a hypothetic
+  compromise of the program.
+
+# Gettext internationalization support :
+  Miredo can now be localized in other languages beside English.
+  A French translation is provided. Other translations will be included
+  upon submission by volunteer translators.
+
+# PID file:
+  Miredo can low create a PID file as /var/run/miredo/miredo.pid which can
+  be useful to make initscripts.
+
+=============================================================================
+BETA RELEASE 0.3.0 : Major features enhancement
+
+# Proper queueing of packets :
+  That should speed up connectivity a bit, and fix various connectivity
+  issues most particularly with, though not limited to, Teredo clients.
+
+# Automatically select an available UDP port for relay and client.
+  You can use the “-p” command line option to specify a particular port
+  number.
+
+# Automatically add a default route through the Teredo tunneling interface
+  when running Miredo as a Teredo client.
+  
+# Fixed a bug that may prevent the client from working correctly.
+
+# Compilation fix for the Darwin kernel (Mac OS X).
+  Miredo needs a separate tunnel device driver to run on Darwin; it can
+  be found there: http://chrisp.de/en/projects/tunnel.html
+
+# Untested support for OpenBSD, NetBSD and Darwin. In any case, routing
+  does not work on Darwin, and the program might not compile on OpenBSD
+  and NetBSD at all (help appreciated).
+
+=============================================================================
+BETA RELEASE 0.2.2 : Minor portability fixes
+
+# Support for binding the relay/client to a specific IPv4 address
+  with the -b (--bind) command line option.
+# Compilation fix for some old GNU libc.
+
+=============================================================================
+BETA RELEASE 0.2.1 : Major bugfixes
+
+# Fixed a segmentation fault in Teredo server code.
+# Fixed client-to-client connectivity with Microsoft and ng_teredo servers.
+# Various minor client timing problem fixed.
+
+=============================================================================
+BETA RELEASE 0.2.0 : Major features enhancement
+
+# Ability to run as a Teredo client:
+    Miredo can now server as a Teredo client. It will set up its Teredo
+  address automatically from a server then forward packets. However, you
+  have to add a default route to the Teredo tunneling interface if you want
+  to use Miredo to access the IPv6 Internet as a whole, instead of only other
+  Teredo clients. Of course, a server name to must be specified for the
+  client mode to work.
+
+# Ability to run behind a restricted NAT device:
+    Miredo’s Teredo relaying functions should now work fine from behind a
+  restricted NAT device (such as most Linux/Netfilter-based NAT). If you are
+  not behind a NAT or if you are behind a cone NAT, you can use command line
+  option “-C” for optimization.
+
+=============================================================================
+ALPHA RELEASE 0.1.1 : Major features enhancement
+
+# Partial support for FreeBSD:
+    Miredo should compile fine on FreeBSD, however it was not yet tested on
+  that platform. Feedback is most welcome.
+
+# Ability to disable server functionality:
+    The server is now disabled by default.
+
+# Ability to change the Teredo prefix (with -P).
+
+# Ability to change the Teredo relay port (with -p).
+
+# Automatic Teredo tunneling interface configuration:
+    Miredo will automatically set the interface local IPv6 address, and set
+  up an IPv6 route toward Teredo clients through the tunneling interface.
+  Additionnaly, the interface MTU will be set to 1280 as suggested by the
+  latest Teredo draft specification, and is automatically brought up and
+  running.
+
+# Possible vulnerabilities impact mitigation:
+    Miredo will drop its root privileges as soon as possible, setuid to
+  “miredo” user (which you should create, or change at run time), setgid,
+  and chroot. For chroot to work, some manual setup is needed.
+
+# Background run:
+    Miredo will automatically detach and run in the background as a “daemon”.
+
+# Automatic relay address configuration:
+    One no longer has to specify the relay IPv4 and IPv6 addresses. This is
+  no longer needed.
+
+# Signals handling: miredo can now be terminated cleanly.
+
+# Minor compliance update for Teredo draft 02, various minor bugfixes.
+
+# Added a manpage.
+
+# Build-time support for Intel C++ Compiler 8.0.
+=============================================================================
+

@@ -1,0 +1,61 @@
+.\" ***********************************************************************
+.\" *  Copyright © 2006-2007 Rémi Denis-Courmont.                         *
+.\" *  This program is free software; you can redistribute and/or modify  *
+.\" *  it under the terms of the GNU General Public License as published  *
+.\" *  by the Free Software Foundation; version 2 of the license.         *
+.\" *                                                                     *
+.\" *  This program is distributed in the hope that it will be useful,    *
+.\" *  but WITHOUT ANY WARRANTY; without even the implied warranty of     *
+.\" *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               *
+.\" *  See the GNU General Public License for more details.               *
+.\" *                                                                     *
+.\" *  You should have received a copy of the GNU General Public License  *
+.\" *  along with this program; if not, you can get it from:              *
+.\" *  http://www.gnu.org/copyleft/gpl.html                               *
+.\" ***********************************************************************
+.TH "MIREDO-CHECKCONF" "8" "February 2008" "miredo" "System Manager's Manual"
+.SH NAME
+miredo-checkconf \- Miredo configuration file syntax checking tool
+.SH SYNOPSIS
+.BR "miredo-checkconf" " [" "config_file" "]"
+
+.SH DESCRIPTON
+.B miredo-checkconf
+checks the syntax of a configuration file for Miredo.
+miredo-checkconf exits with an error code if the syntax was found to be
+incorrect, contained unused directives or if the file could not be opened.
+
+.SH OPTIONS
+
+.TP
+.BR "\-h" " or " "\-\-help"
+Display some help and exit.
+
+.TP
+.BR "\-V" " or " "\-\-version"
+Display program version and exit.
+
+.TP
+.BR "config_file"
+This optional argument specifies the path to the configuration file to
+be checked. If not given, the default @confdir@/miredo.conf will be
+assumed.
+
+.\".SH DIAGNOSTICS
+.SH BUGS
+miredo-checkconf cannot check the syntax of a configuration file for
+miredo-server.
+
+.SH FILES
+.TP
+.I @confdir@/miredo.conf
+The default configuration file.
+
+.SH "SEE ALSO"
+miredo.conf(5), miredo(8)
+
+.SH AUTHOR
+R\[char233]mi Denis-Courmont <remi at remlab dot net>
+
+http://www.remlab.net/miredo/
+

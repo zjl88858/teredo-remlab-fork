@@ -1,0 +1,12 @@
+Maintained by: Rémi Denis-Courmont <remi (at) remlab (dot) net>,
+               Miredo project <miredo (dash) devel (at) remlab (dot) net>
+
+Based on a school work assignment from:
+  Rémi Denis-Courmont, student of general engineering,
+  sponsored by François-Xavier Potel,
+  École Centrale Paris, March-April 2004.
+
+Included MD5 implementation by:
+  L. Peter Deutsch with minor modifications:
+  Copyright (C) 1999, 2000, 2002 Aladdin Enterprises.  All rights reserved.
+  (see libteredo/md5.c, libteredo/md5.h and libteredo/test/md5test.c)

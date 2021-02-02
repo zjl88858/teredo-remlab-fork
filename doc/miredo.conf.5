@@ -1,0 +1,179 @@
+.\" ***********************************************************************
+.\" *  Copyright © 2004-2006 Rémi Denis-Courmont.                         *
+.\" *  This program is free software; you can redistribute and/or modify  *
+.\" *  it under the terms of the GNU General Public License as published  *
+.\" *  by the Free Software Foundation; version 2 of the license.         *
+.\" *                                                                     *
+.\" *  This program is distributed in the hope that it will be useful,    *
+.\" *  but WITHOUT ANY WARRANTY; without even the implied warranty of     *
+.\" *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               *
+.\" *  See the GNU General Public License for more details.               *
+.\" *                                                                     *
+.\" *  You should have received a copy of the GNU General Public License  *
+.\" *  along with this program; if not, you can get it from:              *
+.\" *  http://www.gnu.org/copyleft/gpl.html                               *
+.\" ***********************************************************************
+.TH "MIREDO.CONF" "5" "August 2007" "miredo" "System Manager's Manual"
+.SH NAME
+miredo.conf \- configuration for Miredo
+.SH SYNOPSIS
+.B miredo.conf
+
+.SH DESCRIPTON
+.I miredo.conf
+.RB " is the configuration file for " "Miredo" "."
+Each configuration directive consists of one directive name, possibly
+followed by one or several spaces and a value for the directive.
+White spaces, empty lines and lines starting with '#' are ignored.
+
+Directives are case-insensitive. A comprehensive list of the supported
+directives follows:
+
+.SH MODES
+
+.TP
+.BR "RelayType" " (" "client" "|" "autoclient" "|" "relay" "|" "cone" "|" "restricted" ")"
+Specifies what type of Teredo relay/client Miredo will serve as.
+There are three possible choices:
+
+.TP
+.BR "client" " mode (the default)"
+.RB "In " "client" " mode, " "Miredo" " acts as a "
+.IR "Teredo client" ". Miredo will first authenticate with a "
+.I "Teredo server"
+.RB "(see " "ServerAddress" "), and if successful, will setup a Teredo"
+tunneling interface with a public Teredo IPv6 address and a default
+IPv6 route. That virtual networking interface can be used to reach the
+IPv6 Internet as well as Teredo clients.
+
+The use of Miredo as a Teredo client allows nodes to get an IPv6
+connectivity from behind a NAT router device, as it tunnels IPv6
+packets over UDP/IPv4 with special support for NAT routers. Routers of
+that kind usually only forward TCP, UDP, and some ICMP, IPv4 packets
+(with some limitation).
+
+.BR "NOTE:" " Use of " "Miredo" " as a"
+.IR "Teredo client" " is possible even if the system already has IPv6"
+connectivity through another way (native, 6to4, TSP, etc). In that
+case, Miredo will only be used to reach other Teredo clients, as its
+tunneling interface has a default route with a higher metric (which is
+to say a lower priority) than the other network interfaces.
+
+.TP
+.BR "autoclient" " is currently an alias for " "client" " mode."
+
+.TP
+.BR "cone" " mode (" "relay" " also works)"
+.RB "In " "cone" " mode, " "Miredo" " acts as a "
+.IR "Teredo relay" ". It will assume that it has public global " "IPv4"
+connectivity with no firewall.
+In other words, the UDP port used by Miredo must receive unsoliticited
+.RB "traffic from the IPv4 Internet (see also " "BindPort" ")."
+Miredo will create a virtual networking interface with a route toward
+Teredo clients.
+
+.IR "Teredo relays" " forward IPv6 packets between " "Teredo clients"
+.RB "and the IPv6 Internet. For that to work, Teredo relays " "MUST"
+have a working IPv6 connectivity through a way distinct from Teredo
+tunneling (native, 6to4, ISATAP, etc).
+
+.B Warning:
+This mode should only be used if the node has a public IPv4 address, or
+if it is behind a full cone NAT-router with proper port forwarding
+rules.
+.RB "Otherwise the tunnel will " "NOT WORK PROPERLY" "."
+Note that many NAT port forwarding implementations are broken.
+
+.TP
+.BR "restricted" " mode"
+This mode is identical to the cone mode documented above,
+.RI "with the exception that " "direct Teredo bubbles" " will be sent."
+Theoretically (see RFC4380) this permits operation of a Teredo relay
+from behind a restricted-port NAT.
+In practice, this makes NAT traversal extremely unreliable.
+This setting is present for backward syntax compatibility of
+the miredo.conf file. PLEASE DO NOT USE THIS MODE.
+
+.SH CLIENT OPTIONS
+.RI "The following directives are only available in " "(auto)client"
+mode.
+
+.TP
+.BI "ServerAddress " "hostname"
+.RB "The " "ServerAddress" " directive specifies the hostname or "
+.RI "numerical IPv4 address of the " "Teredo server" " to use."
+.IR "Teredo clients" " needs a  " "Teredo server" " to establish and"
+maintain their IPv6 over UDP/IPv4 tunnel across a NAT device.
+
+.RB "This directive " "MUST" " be specified when Miredo is in"
+.IR "client" " mode. " "hostname" " must resolve to a valid IPv4"
+address. If it is not present, and no server hostname is specified on
+the command line when starting miredo either, the program will fail.
+
+.TP
+.BI "ServerAddress2 " "hostname2"
+Miredo assumes that the secondary Teredo server address equals the
+primary server address plus one. If that is not the case, this
+directive must be used.
+
+.SH RELAY OPTIONS
+.RI "The following directives are only available in " "relay" " mode."
+.RI "They are not available in " "(auto)client" " mode."
+
+.TP
+.BI "Prefix " "teredo_prefix"
+.RB "This directive specifies the " "Teredo prefix" " which the Teredo"
+relay and/or server will advertise.
+.IR "teredo_prefix" " must be a valid IPv6 prefix."
+
+.RB "The default value is " "2001:0000::" "."
+
+.BR "Do not use that directive" " if you don't know what you are"
+doing, as it is more than likely to break your Teredo connectivity.
+That option must not be used when Miredo serves as a Teredo client.
+
+.TP
+.BI "InterfaceMTU " "mtu"
+This directive overrides the default MTU size of 1280 bytes for the
+Teredo tunneling interface. It should not be used if the default Teredo
+prefix is used.
+
+.SH GENERAL OPTIONS
+.TP
+.BI "InterfaceName " "ifname"
+Specify the name of the Teredo tunneling interface which Miredo will
+create ("miredo" by default). On some systems, it is not possible to
+redefine the tunnel name.
+
+.TP
+.BI "BindAddress " "bind_address"
+Bind the Teredo relay or Teredo client to a specific IPv4 address.
+By default, it is not bound to any particular IPv4 address.
+
+Use this option if you have trouble with the default value, such as if
+you have a multi-homed host with equal-cost IPv4 routing, or if you
+have specific firewalling constraints.
+
+.TP
+.BI "BindPort " "udp_port"
+Define the UDP (IPv4) port number to be used by the relay or client.
+By default, the operating system allocates an unused port
+automatically.
+
+Use this option if you have firewalling constraints which can cause
+Miredo to fail when not using a fixed predefined port.
+
+.TP
+.BI "SyslogFacility " "facility"
+Specify which syslog's facility is to be used by Miredo for logging.
+.RB "Possible values are: " "daemon" " (the default), " "local0" ","
+.RB "... " "local7" ", " "kern" " and " "user" " (see syslog(2))."
+
+.SH "SEE ALSO"
+miredo(8)
+
+.SH AUTHOR
+R\[char233]mi Denis-Courmont <remi at remlab dot net>
+
+http://www.remlab.net/miredo/
+
